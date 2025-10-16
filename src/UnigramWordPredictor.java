@@ -10,7 +10,7 @@ import java.util.Scanner;
  * words that directly follow it in the text.
  */
 public class UnigramWordPredictor implements WordPredictor {
-  private Map<String, List<String>> neighborMap;
+  private Map<String, List<String>> neighborMap = new HashMap<>();
   private Tokenizer tokenizer;
 
   /**
@@ -50,8 +50,15 @@ public class UnigramWordPredictor implements WordPredictor {
    */
   public void train(Scanner scanner) {
     List<String> trainingWords = tokenizer.tokenize(scanner);
-
-    // TODO: Convert the trainingWords into neighborMap here
+    for (int i = 0; i < trainingWords.size() - 1; i++) {
+      String x = trainingWords.get(i);
+      if (!neighborMap.containsKey(x)) {
+          neighborMap.put(x, new ArrayList<String>());
+      }
+      if (trainingWords.get(i+1)!=null) {
+          neighborMap.get(x).add(trainingWords.get(i+1));
+      }
+    }
   }
 
   /**
