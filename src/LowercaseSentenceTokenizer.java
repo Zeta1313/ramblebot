@@ -30,18 +30,14 @@ public class LowercaseSentenceTokenizer implements Tokenizer {
    * @return a list of tokens, where each token is a word or a period
    */
   public List<String> tokenize(Scanner scanner) {
-    ArrayList<String> Sentence = new ArrayList<String>();
-    while (scanner.hasNextLine()) {
-      //Need to figure out where this is pulling from, if I need to even scan multiple lines at all.
-      String CurentLine = scanner.nextLine();
-      Scanner ReadCurrentLine = new Scanner(CurentLine);
-      ReadCurrentLine.useDelimiter(" ");
-      while (ReadCurrentLine.hasNext()) {
-        Sentence.add(ReadCurrentLine.next());
-      }
-      ReadCurrentLine.close();
+    List<String> sentence = new ArrayList<>();
+    while (scanner.hasNext()) {
+        String input = scanner.next();
+        if (!input.equals(" ")) {
+            sentence.add(input);
+        }
     }
-    return Sentence;
+    return sentence;
   }
 }
 
