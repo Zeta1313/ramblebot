@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * A class for predicting the next word in a sequence using a unigram model.
@@ -106,9 +102,12 @@ public class UnigramWordPredictor implements WordPredictor {
    * @return the predicted next word, or null if no prediction can be made
    */
   public String predictNextWord(List<String> context) {
-    // TODO: Return a predicted word given the words preceding it
-    // Hint: only the last word in context should be looked at
-    return null;
+    //Not sure if this is actually doing the random correctly. I'm choosing a random number from the range, which should weight the average correctly, but I'm not very good at statistics.
+    List<String> possibilities = neighborMap.get(context.get(context.size() - 1));
+    Random random = new Random();
+    int range = possibilities.size();
+    int choice = random.nextInt(range);
+    return possibilities.get(choice);
   }
   
   /**
